@@ -1,12 +1,11 @@
 import React from 'react';
-import './App.css';
-import { Button } from '@material-ui/core';
+import DefaultLayout from './components/layouts/Default';
 
 function App() {
   return (
-    <div className="App">
-      <Button variant="contained">Default</Button>
-    </div>
+    <DefaultLayout>
+      Hello
+    </DefaultLayout>
   );
 }
 

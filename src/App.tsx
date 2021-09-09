@@ -3,7 +3,7 @@ import DefaultLayout from './components/layouts/Default';
 
 function App() {
   return (
-    <DefaultLayout>
+    <DefaultLayout admin={true}>
       Hello
     </DefaultLayout>
   );

@@ -1,9 +1,7 @@
-import { Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core"
+import { Divider, Drawer, IconButton } from "@material-ui/core"
 import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import clsx from "clsx"
 
 const useStyles = (props: any): any => makeStyles((theme: Theme) =>
@@ -58,14 +56,7 @@ const MyDrawer = (props: any) => {
         </IconButton>
       </div>
       <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+      {props.children}
     </Drawer>
   )
 }

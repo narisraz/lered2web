@@ -1,8 +1,16 @@
 import { Container, CssBaseline } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React, { useState } from 'react';
+import { Router } from 'react-router';
+import MyAdminRoutes from '../MyAdminRoutes';
 import MyAppBar from '../MyAppBar';
 import MyAppDrawer from '../MyDrawer';
+import MyMenu from '../MyMenu';
+import MyMenuAdmin from '../MyMenuAdmin';
+import { createBrowserHistory } from "history";
+
+
+const history = createBrowserHistory();
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const drawerWidth = 240
 
-const DefaultLayout = ({ children }: any) => {
+const DefaultLayout = (props: any) => {
     const [ drawerOpened, setOpen ] = useState(false)
     const classes = useStyles();
 
@@ -40,18 +48,24 @@ const DefaultLayout = ({ children }: any) => {
     };
 
     return (
-        <React.Fragment>
+      <React.Fragment>
+        <Router history={history}>
           <div className={classes.root}>
             <CssBaseline />
             <MyAppBar drawerOpened={drawerOpened} drawerWidth={drawerWidth} openDrawer={handleDrawerOpen} />
-            <MyAppDrawer toolbar={classes.toolbar} opened={drawerOpened} close={handleDrawerClose} width={drawerWidth} />
+            <MyAppDrawer toolbar={classes.toolbar} opened={drawerOpened} close={handleDrawerClose} width={drawerWidth} >
+            { props.admin ? <MyMenuAdmin /> : <MyMenu /> }
+            </MyAppDrawer>
             
             <main className={classes.content}>
-                <div className={classes.toolbar} />
-                <Container>{children}</Container>
+              <div className={classes.toolbar} />
+              <Container>
+                { props.admin ? <MyAdminRoutes /> : <MyAdminRoutes /> }
+              </Container>
             </main>
-            </div>
-        </React.Fragment>
+          </div>
+        </Router>
+      </React.Fragment>
     );
 };
 export default DefaultLayout;
